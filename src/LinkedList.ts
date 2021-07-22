@@ -45,6 +45,7 @@ class LinkedList {
         let nextNode: LinkedListNode | null = this.FindNode(item);
         if (nextNode) {
             newNode.next = nextNode.next;
+            newNode.previous = nextNode;
             nextNode.next = newNode;
             this.size++;
         }
@@ -55,12 +56,21 @@ class LinkedList {
      * @param value any
      */
     public Remove = (value: any) => {
-        let previousNode: LinkedListNode | null = this.FindPrevious(value);
-        if (previousNode && previousNode.next) {
-            previousNode.next = previousNode.next.next;
-            this.size--;
-        } 
-    }
+        let currentNode: LinkedListNode | null = this.FindNode(value);
+        if (currentNode) {
+            let previousNode = currentNode.previous;
+            let nextNode = currentNode.previous;
+            if (previousNode) {
+                previousNode.next = currentNode.next;
+                if (nextNode) {
+                    nextNode.previous = previousNode;
+                }
+                currentNode.next = null;
+                currentNode.previous = null;
+                this.size--;
+            }
+        }
+    };
 
     /**
      * Method to list the members of the linked list
@@ -71,11 +81,11 @@ class LinkedList {
             console.log(currentNode.next.value);
             currentNode = currentNode.next;
         }
-    }
+    };
 
     /**
      * Method to get the size of the LinkedList
-     * @returns 
+     * @returns
      */
     public GetSize = () => this.size;
 }
