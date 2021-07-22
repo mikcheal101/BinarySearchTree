@@ -23,6 +23,19 @@ class LinkedList {
     };
 
     /**
+     * Method to get the previous node
+     * @param value any
+     * @returns currentNode LinkedListNode | null - found node or null
+     */
+    public FindPrevious = (value: any): LinkedListNode | null => {
+        let currentNode: LinkedListNode | null = this.head;
+        while (currentNode && currentNode.next !== value) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
+    };
+
+    /**
      * Method to insert data into the linked list
      * @param value any - the item to be stored in the node
      * @param item any - the item which the new node would be created after
