@@ -29,7 +29,7 @@ class LinkedList {
      */
     public FindPrevious = (value: any): LinkedListNode | null => {
         let currentNode: LinkedListNode | null = this.head;
-        while (currentNode && currentNode.next !== value) {
+        while (currentNode && currentNode.next?.value !== value) {
             currentNode = currentNode.next;
         }
         return currentNode;
@@ -49,6 +49,18 @@ class LinkedList {
             this.size++;
         }
     };
+
+    /**
+     * Method to remove a node based on its value
+     * @param value any
+     */
+    public Remove = (value: any) => {
+        let previousNode: LinkedListNode | null = this.FindPrevious(value);
+        if (previousNode && previousNode.next) {
+            previousNode.next = previousNode.next.next;
+            this.size--;
+        } 
+    }
 
     /**
      * Method to list the members of the linked list
