@@ -88,6 +88,15 @@ class LinkedList {
      * @returns
      */
     public GetSize = () => this.size;
+
+    public Advance = (n: number): LinkedListNode | null => {
+        let currentNode: LinkedListNode = this.head;
+        if (n <= 0 || n >= this.size) return null; 
+        for (let i:number = 0; i < n && currentNode.next; i++) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
+    };
 }
 
 export default LinkedList;
